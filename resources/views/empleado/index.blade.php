@@ -26,7 +26,32 @@
                 </ul>
             </div>
         </nav>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>{{$saludo}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @switch($info)
+            @case(1)
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>Hay info en el sitema: {{$promedio['contador4']}} registros</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @break
+            @case(2)
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <strong>No hay info en el sistema</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @break
+        @endswitch
         <center>
+            <img width="10%" height="20%" src="http://cdn.onlinewebfonts.com/svg/img_382244.png" />
             <h1>Lista de empleados</h1>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#agregarModal">
@@ -40,6 +65,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Edad</th>
+                        <th scope="col">Promedio</th>
                         <th scope="col">Acción</th>
                     </tr>
                 </thead>
@@ -51,7 +77,29 @@
                         <td>{{$empleado -> apellido}}</td>
                         <td>{{$empleado -> edad}}</td>
                         <td>
-                            <button type="button" class="btn btn-success editar" data-id="{{$empleado -> id}}" data-nombre="{{$empleado -> nombre}}" data-apellido="{{$empleado -> apellido}}" data-edad="{{$empleado -> edad}}" data-toggle="modal" data-target="#editarModal">
+                            <!--Estructura condicional-->
+                            @if($empleado -> edad < $promedio['promedio'])
+                            <p>Menor que el promedio</p>
+                            @else @if($empleado -> edad == $promedio['promedio'])
+                            <p>Igual al promedio</p>
+                            @else
+                            <p>Mayor al promedio</p>
+                            <p>
+                                @endif @endif
+                            </p>
+                        </td>
+
+                        <td>
+                            <button
+                                type="button"
+                                class="btn btn-success editar"
+                                data-id="{{$empleado -> id}}"
+                                data-nombre="{{$empleado -> nombre}}"
+                                data-apellido="{{$empleado -> apellido}}"
+                                data-edad="{{$empleado -> edad}}"
+                                data-toggle="modal"
+                                data-target="#editarModal"
+                            >
                                 Editar
                             </button>
                             <button type="button" class="btn btn-danger eliminar" data-id="{{$empleado -> id}}" data-toggle="modal" data-target="#eliminarModal">
@@ -62,6 +110,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <center>
+                <p><strong>Promedio de edades: </strong> {{$promedio['promedio']}} años</p>
+            </center>
         </center>
         <!-- Modal -->
         <div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agregarModalLabel" aria-hidden="true">
@@ -102,7 +153,7 @@
                     </div>
                     <div class="modal-body">
                         <form action="{{ url('edit')}}" method="POST" id="EditarForm">
-                            <input name="id" type="hidden" id="idE">
+                            <input name="id" type="hidden" id="idE" />
                             <p>Nombre:</p>
                             <input type="text" name="nombre" id="nombreE" required pattern="[a-zA-Z ]{2,50}" />
                             <p>Apellido:</p>
@@ -113,7 +164,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" Form="EditarForm">Editar</button>
+                        <button type="submit" class="btn btn-primary" form="EditarForm">Editar</button>
                     </div>
                 </div>
             </div>
@@ -131,7 +182,7 @@
                     <div class="modal-body">
                         ¿Seguro que quieres realizar esta acción?
                         <form action="{{ url('destroy')}}" id="EliminarForm" method="POST">
-                            <input name="idD" type="hidden" id="idD">
+                            <input name="idD" type="hidden" id="idD" />
                         </form>
                     </div>
                     <div class="modal-footer">

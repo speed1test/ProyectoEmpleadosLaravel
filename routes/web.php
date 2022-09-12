@@ -14,17 +14,8 @@ use App\Models\Empleado;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-Route::match(['get', 'post'], '/', function () {
-	$empleados=Empleado::all();
-    return view('empleado/index',compact('empleados'));
-})->name('index');
-/*Route::post('/create', function () {
-    return view('empleado/index');
-});*/
-//Route::post('/',[EmpleadoController::class,'index'])->name('index');
+//Se hace uso de Clases para llamar las diversas funciones que le dan funcionalid a la App Web
+Route::get('/',[EmpleadoController::class,'index'])->name('index');
 Route::post('/create',[EmpleadoController::class,'create'])->name('create');
 Route::post('/destroy',[EmpleadoController::class,'destroy'])->name('destroy');
 Route::post('/edit',[EmpleadoController::class,'edit'])->name('edit');
