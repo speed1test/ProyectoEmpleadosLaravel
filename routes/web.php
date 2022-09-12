@@ -26,4 +26,6 @@ Route::match(['get', 'post'], '/', function () {
 });*/
 //Route::post('/',[EmpleadoController::class,'index'])->name('index');
 Route::post('/create',[EmpleadoController::class,'create'])->name('create');
+Route::post('/destroy',[EmpleadoController::class,'destroy'])->name('destroy');
+Route::post('/edit',[EmpleadoController::class,'edit'])->name('edit');
 Route::resource('empleado',EmpleadoController::class);
