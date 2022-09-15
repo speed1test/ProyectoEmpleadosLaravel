@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 12-09-2022 a las 06:57:53
+-- Tiempo de generación: 15-09-2022 a las 23:33:44
 -- Versión del servidor: 5.7.33
 -- Versión de PHP: 7.4.19
 
@@ -40,7 +40,9 @@ CREATE TABLE `empleados` (
 
 INSERT INTO `empleados` (`id`, `nombre`, `apellido`, `edad`) VALUES
 (8, 'Rosa', 'Guadalupe', 18),
-(9, 'Carlos', 'Pascasio', 19);
+(9, 'Carlos', 'Pascasio', 19),
+(10, 'Wilfredo', 'Lopez', 23),
+(11, 'Eduardo', 'Walcachilla', 30);
 
 -- --------------------------------------------------------
 
@@ -180,7 +182,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
